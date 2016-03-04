@@ -33,19 +33,14 @@ class ChartistGraph extends Component {
     let responsiveOptions = config.responsiveOptions || [];
     let event;
 
-    if (this.chartist) {
-      this.chartist.update(data, options, responsiveOptions);
-    } else {
-      this.chartist = new Chartist[type](findDOMNode(this), data, options, responsiveOptions);
+    this.chartist = new Chartist[type](findDOMNode(this), data, options, responsiveOptions);
 
-      if (config.listener) {
-        for (event in config.listener) {
-          if (config.listener.hasOwnProperty(event)) {
-            this.chartist.on(event, config.listener[event]);
-          }
+    if (config.listener) {
+      for (event in config.listener) {
+        if (config.listener.hasOwnProperty(event)) {
+          this.chartist.on(event, config.listener[event]);
         }
       }
-
     }
 
     return this.chartist;
